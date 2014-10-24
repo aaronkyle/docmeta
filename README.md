@@ -7,3 +7,4 @@ This uses S3 to store the documents.
 This is currently being used as a project on both CCCS and abadi
 
 Instructions on use to go here
+More detail please!
