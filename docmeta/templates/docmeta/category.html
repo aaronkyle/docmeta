@@ -1,4 +1,4 @@
-{% extends 'documents/base_tree.html' %}
+{% extends 'docmeta/base_tree.html' %}
 {% block main %}
     <h1>{{ category }}</h1>
     <p>Go up to
@@ -15,14 +15,14 @@
         <div class="tree well">
             <ul>
                 {% for category in category.children.all %}
-                    {% include 'documents/includes/category_subtree.html' %}
+                    {% include 'docmeta/includes/category_subtree.html' %}
                 {% endfor %}
             </ul>
         </div>
     {% endif %}
     {% if document_list %}
         <h2>{{ document_list.count }} Documents</h2>
-        {% include 'documents/includes/document_list.html' %}
+        {% include 'docmeta/includes/document_list.html' %}
     {% else %}
         <p><em>No entries for {{ category }}</em></p>
     {% endif %}

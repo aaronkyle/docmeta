@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block extra_head %}
-    <script src="{% static 'documents/js/angular.js' %}" type="text/javascript"></script>
-    <script src="{% static 'documents/js/lodash.js' %}" type="text/javascript"></script>
-    <script src="{% static 'documents/js/angularjs-dropdown-multiselect.js' %}" type="text/javascript"></script>
+    <script src="{% static 'docmeta/js/angular.js' %}" type="text/javascript"></script>
+    <script src="{% static 'docmeta/js/lodash.js' %}" type="text/javascript"></script>
+    <script src="{% static 'docmeta/js/angularjs-dropdown-multiselect.js' %}" type="text/javascript"></script>
     <script>
         angular.module('bibtex', ['angularjs-dropdown-multiselect'])
     </script>
@@ -127,6 +127,6 @@
     </div>
 {% endblock main %}
 {% block extra_js %}
-    <script src="{% static 'documents/js/bibtexSearchController.js' %}" type="text/javascript"></script>
-    <script src="{% static 'documents/js/bibtexResultsController.js' %}" type="text/javascript"></script>
+    <script src="{% static 'docmeta/js/bibtexSearchController.js' %}" type="text/javascript"></script>
+    <script src="{% static 'docmeta/js/bibtexResultsController.js' %}" type="text/javascript"></script>
 {% endblock %}

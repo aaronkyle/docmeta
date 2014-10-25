@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "docmeta/css/tree.css" %}">
+{% endblock extra_css %}
+{% block extra_js %}
+    <script src="{% static "docmeta/js/tree.js" %}" type="text/javascript"></script>
+{% endblock extra_js %}

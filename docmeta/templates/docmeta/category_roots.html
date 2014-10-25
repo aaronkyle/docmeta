@@ -1,15 +1,15 @@
-{% extends 'documents/base_tree.html' %}
+{% extends 'docmeta/base_tree.html' %}
 {% block main %}
     <h1>Document Categories</h1>
     <div class="tree well">
         <ul>
             {% for category in categories %}
-                {% include 'documents/includes/category_subtree.html' %}
+                {% include 'docmeta/includes/category_subtree.html' %}
             {% endfor %}
         </ul>
     </div>
     {% if document_list %}
-        <h1>Orphan documents</h1>
-        {% include 'documents/includes/document_list.html' %}
+        <h1>Orphan docmeta</h1>
+        {% include 'docmeta/includes/document_list.html' %}
     {% endif %}
 {% endblock main %}
