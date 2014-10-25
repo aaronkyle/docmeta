@@ -4,7 +4,8 @@ required_packages = [
     'mezzanine',
     'django-taggit',
     'boto',
-    'django-categories']
+    'django-categories',
+    'django-storages']
 
 setup(
     name='docmeta',
