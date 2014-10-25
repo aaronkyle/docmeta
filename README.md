@@ -2,6 +2,12 @@
 
 Metadata for searching and categorising downloadable documents.
 
+## Assumptions
+
+The requirements in the setup.py or requirements.txt must be satisfied.
+
+The built in docmeta templates assume the presence of a mezzanine 'base.html' which they extend.
+
 ## Installation
 
 Add this to requirements
