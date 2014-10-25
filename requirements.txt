@@ -1,0 +1,2 @@
+# Pull all concrete requirements from abstract requirements in setup.py
+-e .
