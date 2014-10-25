@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Document'
-        db.create_table(u'documents_document', (
+        db.create_table(u'docmeta_document', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             (u'keywords_string', self.gf('django.db.models.fields.CharField')(max_length=500, blank=True)),
             ('site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'])),
@@ -29,16 +29,16 @@ class Migration(SchemaMigration):
             ('source_file', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
             ('creator', self.gf('django.db.models.fields.CharField')(max_length=256, null=True, blank=True)),
         ))
-        db.send_create_signal(u'documents', ['Document'])
+        db.send_create_signal(u'docmeta', ['Document'])
 
 
     def backwards(self, orm):
         # Deleting model 'Document'
-        db.delete_table(u'documents_document')
+        db.delete_table(u'docmeta_document')
 
 
     models = {
-        u'documents.document': {
+        u'docmeta.document': {
             'Meta': {'object_name': 'Document'},
             '_meta_title': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
             'content': ('mezzanine.core.fields.RichTextField', [], {}),
@@ -67,4 +67,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['documents']
+    complete_apps = ['docmeta']
