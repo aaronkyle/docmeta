@@ -26,3 +26,29 @@ version in. Then clone a working copy and setup the project for development in y
 (cccs)~/wk/cccs $ cd docmeta
 (cccs)~/wk/cccs $ python setup.py develop
 ```
+
+## Configuration
+
+Add taggit, storages, categoies.editor and docmeta to your INSTALLED_APPS
+
+Run the management command 'syncdb' or 'migrate' as appropriate.
+
+South is recommended on Django versions earlier than 1.7.
+
+Add docmeta.urls to your main project urls.py:
+```
+import docmeta.urls
+...
+urlpatterns += patterns(
+    '',
+    ("^documents/", include(docmeta.urls)),
+    ...
+...
+```
+
+The current backend is S3 so the following settings must be set to appropriate values (keep them out of your repository
+ using a secrets.py):
+  
+AWS_STORAGE_BUCKET_NAME
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
