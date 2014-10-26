@@ -6,7 +6,7 @@ This should never look at uploaded documents because they will already have meta
 import os
 from storages.backends.s3boto import S3BotoStorage
 
-import documents.models as dm
+import docmeta.models as dm
 
 
 def upload_files(source_path, root_path='./'):

@@ -6,11 +6,11 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 
-import documents.models as dm
+import docmeta.models as dm
 
 
 class RootCategoriesView(TemplateView):
-    template_name = 'documents/category_roots.html'
+    template_name = 'docmeta/category_roots.html'
     categories = dm.get_root_categories()
 
     def get_context_data(self, **kwargs):
@@ -32,7 +32,7 @@ class DocumentListView(ListView):
 
 
 class CategoryView(DocumentListView):
-    template_name = 'documents/category.html'
+    template_name = 'docmeta/category.html'
     categories = []
 
     def get_queryset(self):

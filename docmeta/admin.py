@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from categories.admin import CategoryBaseAdmin
 
-import documents.models as dm
+import docmeta.models as dm
 
 
 class DocumentCategoryAdmin(CategoryBaseAdmin):
