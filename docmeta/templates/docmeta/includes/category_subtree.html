@@ -4,7 +4,7 @@
     {%if category.children.count %}
         <ul>
             {%for subcategory in category.children.all %}
-                {%include 'documents/includes/category_subtree.html' with category=subcategory%}
+                {%include 'docmeta/includes/category_subtree.html' with category=subcategory%}
             {%endfor%}
         </ul>
     {%endif%}
