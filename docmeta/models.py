@@ -8,7 +8,6 @@ from taggit.managers import TaggableManager
 
 from storages.backends.s3boto import S3BotoStorage
 
-import projects.models as pm
 from categories.base import (MPTTModel,
                              TreeForeignKey,
                              CategoryManager,
@@ -26,6 +25,25 @@ def sha1(f):
             break
         sha.update(chunk)
     return sha.hexdigest()
+
+
+class UniqueNamed(models.Model):
+    name = models.CharField(max_length=512, unique=True)
+    plural_name = models.CharField(max_length=512, null=True, blank=True)
+
+    class Meta:
+        abstract = True
+        ordering = ['name']
+
+    def __unicode__(self):
+        return u"{0}".format(self.name)
+
+    @property
+    def plural(self):
+        if self.plural_name is None or len(self.plural_name) == 0:
+            return u"{0}s".format(self.name)
+        else:
+            return self.plural_name
 
 
 class DocumentCategory(MPTTModel):
@@ -87,19 +105,19 @@ class DocumentCategory(MPTTModel):
         return category_slugs
 
 
-class BibTexEntryType(pm.UniqueNamed):
+class BibTexEntryType(UniqueNamed):
     class Meta:
         verbose_name = 'BIBTEX Entry Type'
         verbose_name_plural = 'BIBTEX Entry Types'
 
 
-class CCCSEntryType(pm.UniqueNamed):
+class CCCSEntryType(UniqueNamed):
     class Meta:
         verbose_name = 'CCCS Entry Type'
         verbose_name_plural = 'CCCS Entry Types'
 
 
-class Url(pm.UniqueNamed):
+class Url(UniqueNamed):
     class Meta:
         verbose_name = "URL"
         verbose_name_plural = "URLs"
@@ -107,17 +125,17 @@ class Url(pm.UniqueNamed):
 Url._meta.get_field('name').verbose_name = 'URL String'
 
 
-class FileName(pm.UniqueNamed):
+class FileName(UniqueNamed):
     pass
 
 
-class Author(pm.UniqueNamed):
+class Author(UniqueNamed):
     class Meta:
         verbose_name = 'Author(s)'
         verbose_name_plural = 'Author(s)'
 
 
-class Editor(pm.UniqueNamed):
+class Editor(UniqueNamed):
     class Meta:
         verbose_name = 'Editor(s)'
         verbose_name_plural = 'Editor(s)'
@@ -145,7 +163,7 @@ class Document(RichText, Displayable):
     cccs_source_path = models.CharField(max_length=512, null=True, blank=True)
     bibtex_entry_type = models.ForeignKey(BibTexEntryType, null=True, blank=True)
     cccs_entry_type = models.ForeignKey(CCCSEntryType, null=True, blank=True)
-    countries = models.ManyToManyField(pm.Country, related_name='documents', verbose_name="Country / Countries")
+    countries = models.CharField(max_length=512, null=True, blank=True)
     tags = TaggableManager(blank=True)
     categories = models.ManyToManyField(DocumentCategory, related_name='documents')
     url = models.ManyToManyField(Url, related_name='documents')
