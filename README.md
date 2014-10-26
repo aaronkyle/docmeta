@@ -52,3 +52,11 @@ The current backend is S3 so the following settings must be set to appropriate v
 AWS_STORAGE_BUCKET_NAME
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
+
+## Updating current production environments
+When development is done, the production environments become out of date. Updating them is optional
+and can be done using the following pip command in the relevant environment:
+```
+(production)abadi:~/production $ pip install -e git://github.com/cccs-web/docmeta.git#egg=docmeta
+```
+If necessary, use pip freeze to write back the commit that has been installed this way.
