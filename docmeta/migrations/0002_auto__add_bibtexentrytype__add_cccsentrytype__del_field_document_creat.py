@@ -108,11 +108,13 @@ class Migration(SchemaMigration):
                       keep_default=False)
 
         # Adding M2M table for field countries on 'Document'
+        # Patching this because original model is not available (which should not matter)
+        # using docmeta.document because it is available as a stand in
         m2m_table_name = db.shorten_name(u'docmeta_document_countries')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('document', models.ForeignKey(orm[u'docmeta.document'], null=False)),
-            ('country', models.ForeignKey(orm[u'projects.country'], null=False))
+            ('country', models.ForeignKey(orm[u'docmeta.document'], null=False))
         ))
         db.create_unique(m2m_table_name, ['document_id', 'country_id'])
 
@@ -204,7 +206,7 @@ class Migration(SchemaMigration):
             'cccs_source_path': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True', 'blank': 'True'}),
             'chapter': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'content': ('mezzanine.core.fields.RichTextField', [], {}),
-            'countries': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'docmeta'", 'symmetrical': 'False', 'to': u"orm['projects.Country']"}),
+            'countries': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'docmeta'", 'symmetrical': 'False', 'to': u"orm['docmeta.Document']"}),
             'created': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'editor': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
@@ -230,18 +232,6 @@ class Migration(SchemaMigration):
             'updated': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'volume': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'year': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
-        },
-        u'projects.country': {
-            'Meta': {'object_name': 'Country'},
-            'fips': ('django.db.models.fields.CharField', [], {'max_length': '2', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'iso': ('django.db.models.fields.CharField', [], {'max_length': '7', 'null': 'True', 'blank': 'True'}),
-            'iso_3166': ('django.db.models.fields.CharField', [], {'max_length': '3', 'null': 'True', 'blank': 'True'}),
-            'iso_english_name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
-            'iso_numeric': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '512'}),
-            'notes': ('django.db.models.fields.TextField', [], {'max_length': '512', 'null': 'True', 'blank': 'True'}),
-            'plural_name': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True', 'blank': 'True'})
         },
         u'sites.site': {
             'Meta': {'ordering': "(u'domain',)", 'object_name': 'Site', 'db_table': "u'django_site'"},
