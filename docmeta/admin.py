@@ -61,3 +61,7 @@ class DocumentAdmin(admin.ModelAdmin):
 admin.site.register(dm.Document, DocumentAdmin)
 admin.site.register(dm.BibTexEntryType, admin.ModelAdmin)
 admin.site.register(dm.CCCSEntryType, admin.ModelAdmin)
+admin.site.register(dm.Url, admin.ModelAdmin)
+admin.site.register(dm.FileName, admin.ModelAdmin)
+admin.site.register(dm.Author, admin.ModelAdmin)
+admin.site.register(dm.Editor, admin.ModelAdmin)
