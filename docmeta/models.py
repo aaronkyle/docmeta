@@ -1,4 +1,5 @@
 import hashlib
+import re
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
@@ -156,6 +157,8 @@ class Document(RichText, Displayable):
     pages = models.CharField(max_length=256, null=True, blank=True)
     series = models.CharField(max_length=256, null=True, blank=True)
     language = models.CharField(max_length=256, null=True, blank=True)
+    article_title = models.CharField(max_length=512, null=True, blank=True,
+                                     help_text="BibTex Article Title")
     publishing_agency = models.CharField(max_length=256, null=True, blank=True)
     publishing_house = models.CharField(max_length=256, null=True, blank=True)
     publisher_city = models.CharField(max_length=256, null=True, blank=True)
@@ -187,6 +190,10 @@ class Document(RichText, Displayable):
     def tag_string(self):
         return ', '.join([tag.name for tag in self.tags.all()])
 
+    def save(self, *args, **kwargs):
+        self.unique_title()
+        super(Document, self).save(*args, **kwargs)
+
     def update_sha(self):
         try:
             self.source_file.open()
@@ -196,6 +203,10 @@ class Document(RichText, Displayable):
                 self.source_file.close()
         except IOError:
             self.sha = 'file missing'
+
+    def unique_title(self):
+        self.title = get_unique_title(self.title)
+
 
 Document._meta.get_field('content').verbose_name = 'Abstract/Description of content'
 
@@ -242,3 +253,23 @@ def get_root_categories():
 
 def get_orphan_documents():
     return Document.objects.filter(categories=None)
+
+
+def get_unique_title(title):
+    """
+    Return unique version of title, altering it if necessary by adding (or incrementing) a suffixed integer in brackets.
+    For example, if the matching title 'About' already exists, return 'About (1)'
+    Altered titles will result in numbers being re-used.
+    This is done as a function because it is also used in migration
+    """
+    pat = re.compile(r'(.*\()(\d+)(\))$')  # (title_prefix, existing_num, title_suffix) if successful
+    if Document.objects.filter(title=title)[1:]:  # more than one so not unique
+        while Document.objects.filter(title=title):  # any matches
+                match = re.match(pat, title)
+                if match:  # already has a number so increment it
+                    num = int(match.groups()[1]) + 1
+                    title = match.groups()[0] + str(num) + match.groups()[2]
+                else:  # Add the first incremental number
+                    title = "{title} (1)".format(title=title)
+
+    return title
