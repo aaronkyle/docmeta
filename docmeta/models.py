@@ -126,10 +126,6 @@ class Url(UniqueNamed):
 Url._meta.get_field('name').verbose_name = 'URL String'
 
 
-class FileName(UniqueNamed):
-    pass
-
-
 class Author(UniqueNamed):
     class Meta:
         verbose_name = 'Author(s)'
@@ -172,7 +168,6 @@ class Document(RichText, Displayable):
     url = models.ManyToManyField(Url, related_name='documents')
     date_received = models.DateField(null=True, blank=True)
     receiving_team_member = models.CharField(max_length=128, null=True, blank=True)
-    filenames = models.ManyToManyField(FileName, related_name='documents')
     regions = models.CharField(verbose_name='Region(s)', max_length=128, null=True, blank=True)
     document_id = models.CharField(verbose_name='Doc ID#/ISSN/ISBN', max_length=128, null=True, blank=True)
     annotation = models.CharField(verbose_name='Bibliographic annotation', max_length=128, null=True, blank=True)
@@ -209,6 +204,15 @@ class Document(RichText, Displayable):
 
 
 Document._meta.get_field('content').verbose_name = 'Abstract/Description of content'
+
+
+class DocumentFileName(models.Model):
+    document = models.ForeignKey(Document)
+    name = models.CharField(max_length=512)
+
+    class Meta:
+        unique_together = ('document', 'name')
+        ordering = ('document', 'name')
 
 
 def categories_from_slugs(slugs):
