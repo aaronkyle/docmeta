@@ -5,7 +5,9 @@ required_packages = [
     'django-taggit',
     'boto',
     'django-categories',
-    'django-storages']
+    'django-storages',
+    'pdfminer',
+    'python-dateutil']
 
 setup(
     name='docmeta',

@@ -1,2 +1,4 @@
 # Pull all concrete requirements from abstract requirements in setup.py
 -e .
+pdfminer==20140328
+python-dateutil==2.2

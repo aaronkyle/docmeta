@@ -142,6 +142,8 @@ class Editor(UniqueNamed):
 class Document(RichText, Displayable):
     name = models.CharField(max_length=512, unique=True, default='')  # default is just to feed South
     source_file = models.FileField(max_length=512, upload_to='documents/%Y/%m/%d', storage=S3BotoStorage())
+    source_file_created = models.DateTimeField(null=True, blank=True)
+    source_file_modified = models.DateTimeField(null=True, blank=True)
     sha = models.CharField(max_length=40, null=True, blank=True)
     authors = models.ManyToManyField(Author, related_name='documents')
     editors = models.ManyToManyField(Editor, related_name='documents')
