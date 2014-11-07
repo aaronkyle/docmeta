@@ -10,7 +10,7 @@
     <tbody>
     {% for document in document_list %}
         <tr>
-            <td><a href="{% url 'document-detail' slug=document.slug %}">{{ document.title }}</a></td>
+            <td><a href="{% url 'document-detail' slug=document.slug %}">{{ document.name }}</a></td>
             <td>{{ document.author }}</td>
             <td>{{ document.year }}</td>
         </tr>

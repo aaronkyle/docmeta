@@ -22,10 +22,11 @@ class DocumentFileNameInline(admin.TabularInline):
 
 
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ['title', 'created', 'updated']
+    list_display = ['name', 'title', 'created', 'updated']
     list_filter = ['tags']
     readonly_fields = ['sha']
-    fieldsets = ((None, {'fields': ('title',
+    fieldsets = ((None, {'fields': ('name',
+                                    'title',
                                     'source_file',
                                     'sha',
                                     'authors',

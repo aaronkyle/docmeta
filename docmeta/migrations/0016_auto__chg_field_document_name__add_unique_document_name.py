@@ -1,28 +1,27 @@
 # -*- coding: utf-8 -*-
 from south.utils import datetime_utils as datetime
 from south.db import db
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
 
-from docmeta.models import get_unique_title
 
-
-class Migration(DataMigration):
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # superceded
-        pass
-        # for doc in orm.Document.objects.all():
-        #     old_title = doc.title
-        #     new_title = get_unique_title(old_title)
-        #     if old_title != new_title:
-        #         doc.title = new_title
-        #         doc.save()
+
+        # Changing field 'Document.name'
+        db.alter_column(u'docmeta_document', 'name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=512))
+        # Adding unique constraint on 'Document', fields ['name']
+        db.create_unique(u'docmeta_document', ['name'])
 
 
     def backwards(self, orm):
-        """Write your backwards methods here."""
-        raise RuntimeError("No way to unambiguously go back even if we wanted to")
+        # Removing unique constraint on 'Document', fields ['name']
+        db.delete_unique(u'docmeta_document', ['name'])
+
+
+        # Changing field 'Document.name'
+        db.alter_column(u'docmeta_document', 'name', self.gf('django.db.models.fields.CharField')(max_length=512, null=True))
 
     models = {
         u'docmeta.author': {
@@ -47,6 +46,7 @@ class Migration(DataMigration):
             'Meta': {'ordering': "('title',)", 'object_name': 'Document'},
             '_meta_title': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
             'annotation': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
+            'article_title': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True', 'blank': 'True'}),
             'authors': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'documents'", 'symmetrical': 'False', 'to': u"orm['docmeta.Author']"}),
             'bibtex_entry_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['docmeta.BibTexEntryType']", 'null': 'True', 'blank': 'True'}),
             'categories': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'documents'", 'symmetrical': 'False', 'to': u"orm['docmeta.DocumentCategory']"}),
@@ -62,7 +62,6 @@ class Migration(DataMigration):
             'document_id': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
             'editors': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'documents'", 'symmetrical': 'False', 'to': u"orm['docmeta.Editor']"}),
             'expiry_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'filenames': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'documents'", 'symmetrical': 'False', 'to': u"orm['docmeta.FileName']"}),
             'gen_description': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'in_sitemap': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
@@ -71,6 +70,7 @@ class Migration(DataMigration):
             u'keywords_string': ('django.db.models.fields.CharField', [], {'max_length': '500', 'blank': 'True'}),
             'language': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'month': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'default': "''", 'unique': 'True', 'max_length': '512'}),
             'notes': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'pages': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'publish_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
@@ -105,14 +105,14 @@ class Migration(DataMigration):
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '512'}),
             u'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'})
         },
+        u'docmeta.documentfilename': {
+            'Meta': {'ordering': "('document', 'name')", 'unique_together': "(('document', 'name'),)", 'object_name': 'DocumentFileName'},
+            'document': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['docmeta.Document']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '512'})
+        },
         u'docmeta.editor': {
             'Meta': {'object_name': 'Editor'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '512'}),
-            'plural_name': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True', 'blank': 'True'})
-        },
-        u'docmeta.filename': {
-            'Meta': {'ordering': "['name']", 'object_name': 'FileName'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '512'}),
             'plural_name': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True', 'blank': 'True'})
@@ -132,4 +132,3 @@ class Migration(DataMigration):
     }
 
     complete_apps = ['docmeta']
-    symmetrical = True

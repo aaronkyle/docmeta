@@ -40,9 +40,10 @@ def import_files():
             if title:  # ignore .xxx files
                 document = dm.Document(source_file=key.name,
                                        title=title)
-                document.save()  # save here so m2m relations are possible
+                document.save()  # save here so relations are possible
 
-                filename, created = dm.FileName.objects.get_or_create(name=key.name)
+                filename, created = dm.DocumentFileName.objects.get_or_create(
+                    document=document, name=key.name)
                 if created:
                     filename.save()
                 document.filenames.add(filename)

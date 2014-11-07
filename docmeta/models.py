@@ -1,3 +1,4 @@
+import os
 import hashlib
 import re
 from django.db import models
@@ -139,6 +140,7 @@ class Editor(UniqueNamed):
 
 
 class Document(RichText, Displayable):
+    name = models.CharField(max_length=512, unique=True, default='')  # default is just to feed South
     source_file = models.FileField(max_length=512, upload_to='documents/%Y/%m/%d', storage=S3BotoStorage())
     sha = models.CharField(max_length=40, null=True, blank=True)
     authors = models.ManyToManyField(Author, related_name='documents')
@@ -186,7 +188,6 @@ class Document(RichText, Displayable):
         return ', '.join([tag.name for tag in self.tags.all()])
 
     def save(self, *args, **kwargs):
-        self.unique_title()
         super(Document, self).save(*args, **kwargs)
 
     def update_sha(self):
@@ -198,6 +199,9 @@ class Document(RichText, Displayable):
                 self.source_file.close()
         except IOError:
             self.sha = 'file missing'
+
+    def unique_name(self):
+        self.name = get_unique_name(self)
 
     def unique_title(self):
         self.title = get_unique_title(self.title)
@@ -261,19 +265,46 @@ def get_orphan_documents():
 
 def get_unique_title(title):
     """
-    Return unique version of title, altering it if necessary by adding (or incrementing) a suffixed integer in brackets.
-    For example, if the matching title 'About' already exists, return 'About (1)'
-    Altered titles will result in numbers being re-used.
-    This is done as a function because it is also used in migration
+    Return unique version of title, altering it if necessary by adding (or incrementing) a suffixed integer in
+    brackets. For example, if the matching title 'About' already exists, return 'About (1)' Altered titles will
+    result in numbers being re-used. This is done as a function because it is also used in migration
     """
-    pat = re.compile(r'(.*\()(\d+)(\))$')  # (title_prefix, existing_num, title_suffix) if successful
-    if Document.objects.filter(title=title)[1:]:  # more than one so not unique
-        while Document.objects.filter(title=title):  # any matches
-                match = re.match(pat, title)
-                if match:  # already has a number so increment it
-                    num = int(match.groups()[1]) + 1
-                    title = match.groups()[0] + str(num) + match.groups()[2]
-                else:  # Add the first incremental number
-                    title = "{title} (1)".format(title=title)
+    return get_unique_field_value(title, Document.objects, 'title')
 
-    return title
+
+def get_unique_name(document):
+    """
+    Return unique version of name field for document.
+    """
+    if document.name:
+        candidate = document.name
+    else:
+        try:
+            filename = document.documentfilename_set.first().name
+            candidate = os.path.splitext(os.path.basename(filename))[0]
+        except DocumentFileName.DoesNotExist:
+            candidate = document.title
+    return get_unique_field_value(candidate, Document.objects, 'name')
+
+
+def get_unique_field_value(candidate, object_manager, field_name):
+    """
+    Return unique version of field_name candidate, altering it if necessary by adding (or incrementing) a suffixed
+    integer in brackets. For example, if the matching candidate 'About' already exists, return 'About (1)'.
+    """
+    pat = re.compile(r'(.*\()(\d+)(\))$')  # (prefix, existing_num, suffix) if successful
+
+    def generate_new_candidate(candidate):
+        match = re.match(pat, candidate)
+        if match:  # already has a number so increment it
+            num = int(match.groups()[1]) + 1
+            new_candidate = match.groups()[0] + str(num) + match.groups()[2]
+        else:  # Add the first incremental number
+            new_candidate = "{0} (1)".format(candidate)
+        return new_candidate
+
+    if object_manager.filter(**{field_name: candidate})[1:]:  # more than one so not unique
+        while object_manager.filter(**{field_name: candidate}):  # any matches
+            candidate = generate_new_candidate(candidate)
+
+    return candidate
