@@ -4,6 +4,7 @@ import re
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
+from django.contrib.auth.models import User
 
 from mezzanine.core.models import Displayable, RichText, CONTENT_STATUS_DRAFT, CONTENT_STATUS_PUBLISHED
 from taggit.managers import TaggableManager
@@ -152,8 +153,10 @@ class Document(RichText, Displayable):
                                                 help_text='Date source file last modified')
     sha = models.CharField(max_length=40, null=True, blank=True,
                            help_text='SHA for the source file (used to identify unique files)')
-    authors = models.ManyToManyField(Author, related_name='documents')
-    editors = models.ManyToManyField(Editor, related_name='documents')
+    authors = models.ManyToManyField(Author, related_name='documents',
+                                     help_text='Author or authors of this file')
+    editors = models.ManyToManyField(Editor, related_name='documents',
+                                     help_text='Editor or editors of this file')
     year = models.IntegerField(null=True, blank=True)
     month = models.IntegerField(null=True, blank=True)
     day = models.IntegerField(null=True, blank=True)
@@ -175,8 +178,9 @@ class Document(RichText, Displayable):
     tags = TaggableManager(blank=True)
     categories = models.ManyToManyField(DocumentCategory, related_name='documents')
     url = models.ManyToManyField(Url, related_name='documents')
-    date_received = models.DateField(null=True, blank=True)
-    receiving_team_member = models.CharField(max_length=128, null=True, blank=True)
+    date_received = models.DateField(null=True, blank=True, auto_now_add=True,
+                                     help_text='Date this file was received')
+    receiver = models.ForeignKey(User, null=True, blank=True)
     regions = models.CharField(verbose_name='Region(s)', max_length=128, null=True, blank=True)
     document_id = models.CharField(verbose_name='Doc ID#/ISSN/ISBN', max_length=128, null=True, blank=True)
     annotation = models.CharField(verbose_name='Bibliographic annotation', max_length=128, null=True, blank=True)
