@@ -24,10 +24,11 @@ class DocumentFileNameInline(admin.TabularInline):
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ['name', 'title', 'created', 'updated']
     list_filter = ['tags']
-    readonly_fields = ['sha']
     fieldsets = ((None, {'fields': ('name',
                                     'title',
                                     'source_file',
+                                    'source_file_created',
+                                    'source_file_modified',
                                     'sha',
                                     'authors',
                                     'editors',
@@ -59,11 +60,13 @@ class DocumentAdmin(admin.ModelAdmin):
                                           'publish_date',
                                           'expiry_date')}))
     filter_horizontal = ('categories', 'authors', 'editors')
+    readonly_fields = ('sha', 'source_file_created', 'source_file_modified')
     inlines = (DocumentFileNameInline,)
 
     def save_model(self, request, document, form, change):
         super(DocumentAdmin, self).save_model(request, document, form, change)
-        filename, created = dm.FileName.objects.get_or_create(name=request.FILES['source_file'].name)
+        filename, created = dm.DocumentFileName.objects.get_or_create(name=request.FILES['source_file'].name,
+                                                                      document=document)
         if created:
             filename.save()
         document.filenames.add(filename)

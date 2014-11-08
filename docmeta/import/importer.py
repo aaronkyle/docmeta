@@ -55,13 +55,12 @@ def import_files():
                     document.categories.add(categories[-1])
 
 
-def update_sha_values(force=False):
+def update_metadata(overwrite=False):
     """
-    Go through all the documents and update their sha values
-    :parameter: force - if true updates SHA even if it is already present (in case it is wrong).
+    Go through all the documents and update their metadata
+    :parameter: overwrite - if true updates even if metadata is already present.
     :return: None
     """
     for document in dm.Document.objects.all():
-        if force or document.sha is None:
-            document.update_sha()
+        if document.update_metadata_from_source_file(overwrite=overwrite):
             document.save()

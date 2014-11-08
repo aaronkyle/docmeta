@@ -1,3 +1,4 @@
+import os
 import datetime
 import re
 
@@ -68,15 +69,16 @@ metadata_map = {
     'Title': ('title', transform_text)}
 
 
-def pdf_metadata(filepath):
+def pdf_metadata(document):
     """
     Return dict of metadata in pdf file fp.
-    :param fp: file pointer
+    :param document: docmeta Document model object
     :return: dict of metadata
     """
     global metadata_map
-    with open(filepath, 'rb') as f:
-        parser = PDFParser(f)
+    try:
+        document.source_file.open()
+        parser = PDFParser(document.source_file)
         doc = PDFDocument(parser)
         result = dict()
         for k, v in doc.info[0].iteritems():
@@ -84,3 +86,20 @@ def pdf_metadata(filepath):
                 (metadata_field, transform) = metadata_map[k]
                 result[metadata_field] = transform(v)
         return result
+    finally:
+        document.source_file.close()
+
+extractors = {
+    'pdf': pdf_metadata
+}
+
+
+def extract_metadata(document):
+    global extractors
+    basename = os.path.basename(document.source_file.name)
+    (name, ext) = os.path.splitext(basename)
+    ext = ext[1:]
+    if ext in extractors:
+        return extractors[ext](document)
+    else:
+        return {}

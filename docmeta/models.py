@@ -18,6 +18,8 @@ from categories.base import (MPTTModel,
                              SLUG_TRANSLITERATOR,  # Showing incorrect because of PyCharm bug
                              force_unicode)
 
+from docmeta.utils.extract_metadata import extract_metadata
+
 
 def sha1(f):
     sha = hashlib.sha1()
@@ -140,11 +142,16 @@ class Editor(UniqueNamed):
 
 
 class Document(RichText, Displayable):
-    name = models.CharField(max_length=512, unique=True, default='')  # default is just to feed South
-    source_file = models.FileField(max_length=512, upload_to='documents/%Y/%m/%d', storage=S3BotoStorage())
-    source_file_created = models.DateTimeField(null=True, blank=True)
-    source_file_modified = models.DateTimeField(null=True, blank=True)
-    sha = models.CharField(max_length=40, null=True, blank=True)
+    name = models.CharField(max_length=512, unique=True, default='',
+                            help_text='Useful unique name for this document (as short as possible)')  # default is just to feed South
+    source_file = models.FileField(max_length=512, upload_to='documents/%Y/%m/%d', storage=S3BotoStorage(),
+                                   help_text='Source file for download or presentation')
+    source_file_created = models.DateTimeField(null=True, blank=True,
+                                               help_text='Date source file created')
+    source_file_modified = models.DateTimeField(null=True, blank=True,
+                                                help_text='Date source file last modified')
+    sha = models.CharField(max_length=40, null=True, blank=True,
+                           help_text='SHA for the source file (used to identify unique files)')
     authors = models.ManyToManyField(Author, related_name='documents')
     editors = models.ManyToManyField(Editor, related_name='documents')
     year = models.IntegerField(null=True, blank=True)
@@ -157,8 +164,6 @@ class Document(RichText, Displayable):
     pages = models.CharField(max_length=256, null=True, blank=True)
     series = models.CharField(max_length=256, null=True, blank=True)
     language = models.CharField(max_length=256, null=True, blank=True)
-    article_title = models.CharField(max_length=512, null=True, blank=True,
-                                     help_text="BibTex Article Title")
     publishing_agency = models.CharField(max_length=256, null=True, blank=True)
     publishing_house = models.CharField(max_length=256, null=True, blank=True)
     publisher_city = models.CharField(max_length=256, null=True, blank=True)
@@ -192,6 +197,32 @@ class Document(RichText, Displayable):
     def save(self, *args, **kwargs):
         super(Document, self).save(*args, **kwargs)
 
+    def update_metadata_from_source_file(self, overwrite=False):
+        """
+        Use source file to update metadata, overwriting if specified
+        """
+        changed = False
+        if (self.sha is None) or overwrite:
+            self.update_sha()
+            changed = True
+
+        meta_info = extract_metadata(self)
+
+        for k in ('author', 'source_file_modified', 'source_file_created', 'title'):
+            if not (hasattr(self, k) and getattr(self, k)) or overwrite:
+                if k in meta_info:
+                    new_value = meta_info[k]
+                    if k == 'author':
+                        author, author_created = Author.objects.get_or_create(name=new_value)
+                        if new_value:
+                            author.save()
+                        self.authors.add(author)
+                    else:
+                        setattr(self, k, new_value)
+                    changed = True
+        return changed
+
+
     def update_sha(self):
         try:
             self.source_file.open()
@@ -205,7 +236,7 @@ class Document(RichText, Displayable):
     def unique_name(self):
         self.name = get_unique_name(self)
 
-    def unique_title(self):
+    def unique_title(self):  #
         self.title = get_unique_title(self.title)
 
 
