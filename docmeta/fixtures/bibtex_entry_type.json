@@ -1,0 +1,114 @@
+[
+{
+    "pk": 1, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "article"
+    }
+},
+{
+    "pk": 2, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "book"
+    }
+},
+{
+    "pk": 3, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "booklet"
+    }
+},
+{
+    "pk": 4, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "conference"
+    }
+},
+{
+    "pk": 5, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "inbook"
+    }
+},
+{
+    "pk": 6, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "incollection"
+    }
+},
+{
+    "pk": 7, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "inproceedings"
+    }
+},
+{
+    "pk": 8, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "manual"
+    }
+},
+{
+    "pk": 9, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "mastersthesis"
+    }
+},
+{
+    "pk": 10, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "misc"
+    }
+},
+{
+    "pk": 11, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "phdthesis"
+    }
+},
+{
+    "pk": 12, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "proceedings"
+    }
+},
+{
+    "pk": 13, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "techreport"
+    }
+},
+{
+    "pk": 14, 
+    "model": "docmeta.bibtexentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "unpublished"
+    }
+}
+]

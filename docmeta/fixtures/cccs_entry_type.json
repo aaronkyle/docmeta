@@ -1,0 +1,98 @@
+[
+{
+    "pk": 1, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "policy"
+    }
+},
+{
+    "pk": 2, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "operational guide"
+    }
+},
+{
+    "pk": 3, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "evaluation study"
+    }
+},
+{
+    "pk": 4, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "case study"
+    }
+},
+{
+    "pk": 5, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "loan agreement"
+    }
+},
+{
+    "pk": 6, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "project agreement"
+    }
+},
+{
+    "pk": 7, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "operational update"
+    }
+},
+{
+    "pk": 8, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "impact assessment"
+    }
+},
+{
+    "pk": 9, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "technical assistance report"
+    }
+},
+{
+    "pk": 10, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "brochure"
+    }
+},
+{
+    "pk": 11, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "proposal"
+    }
+},
+{
+    "pk": 12, 
+    "model": "docmeta.cccsentrytype", 
+    "fields": {
+        "plural_name": null, 
+        "name": "terms of reference"
+    }
+}
+]

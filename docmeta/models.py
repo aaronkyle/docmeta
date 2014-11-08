@@ -111,13 +111,13 @@ class DocumentCategory(MPTTModel):
 
 
 class BibTexEntryType(UniqueNamed):
-    class Meta:
+    class Meta(UniqueNamed.Meta):
         verbose_name = 'BIBTEX Entry Type'
         verbose_name_plural = 'BIBTEX Entry Types'
 
 
 class CCCSEntryType(UniqueNamed):
-    class Meta:
+    class Meta(UniqueNamed.Meta):
         verbose_name = 'CCCS Entry Type'
         verbose_name_plural = 'CCCS Entry Types'
 
@@ -154,14 +154,17 @@ class Document(RichText, Displayable):
     sha = models.CharField(max_length=40, null=True, blank=True,
                            help_text='SHA for the source file (used to identify unique files)')
     authors = models.ManyToManyField(Author, related_name='documents',
-                                     help_text='Author or authors of this file')
+                                     help_text='Author or authors of this file',
+                                     verbose_name='Author(s)')
     editors = models.ManyToManyField(Editor, related_name='documents',
-                                     help_text='Editor or editors of this file')
+                                     help_text='Editor or editors of this file',
+                                     verbose_name='Editor(s)')
     year = models.IntegerField(null=True, blank=True)
     month = models.IntegerField(null=True, blank=True)
     day = models.IntegerField(null=True, blank=True)
     chapter = models.CharField(max_length=256, null=True, blank=True)
-    journal = models.CharField(max_length=256, null=True, blank=True)
+    journal = models.CharField(max_length=256, null=True, blank=True,
+                               verbose_name='Journal / Publication')
     volume = models.CharField(max_length=256, null=True, blank=True)
     issue = models.CharField(max_length=256, null=True, blank=True)
     pages = models.CharField(max_length=256, null=True, blank=True)
@@ -245,6 +248,7 @@ class Document(RichText, Displayable):
 
 
 Document._meta.get_field('content').verbose_name = 'Abstract/Description of content'
+Document._meta.get_field('title').verbose_name = 'Document / Article Title'
 
 
 class DocumentFileName(models.Model):
