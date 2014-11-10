@@ -261,6 +261,8 @@ class Document(RichText, Displayable):
         return ', '.join([tag.name for tag in self.tags.all()])
 
     def save(self, *args, **kwargs):
+        if self.id is None:  # new
+            self.unique_name()
         super(Document, self).save(*args, **kwargs)
 
     def update_metadata(self, overwrite=False):
@@ -403,14 +405,14 @@ def get_unique_name(document):
     """
     Return unique version of name field for document.
     """
-    if document.name:
+    if document.name:  # use existing name
         candidate = document.name
     else:
-        try:
-            filename = document.documentfilename_set.first().name
-            candidate = os.path.splitext(os.path.basename(filename))[0]
-        except DocumentFileName.DoesNotExist:
+        document_filename = document.documentfilename_set.first()
+        if document_filename is None:  # use title
             candidate = document.title
+        else:  # use filename
+            candidate = os.path.splitext(os.path.basename(document_filename.name))[0]
     return get_unique_field_value(candidate, Document.objects, 'name')
 
 
@@ -430,8 +432,7 @@ def get_unique_field_value(candidate, object_manager, field_name):
             new_candidate = "{0} (1)".format(candidate)
         return new_candidate
 
-    if object_manager.filter(**{field_name: candidate})[1:]:  # more than one so not unique
-        while object_manager.filter(**{field_name: candidate}):  # any matches
-            candidate = generate_new_candidate(candidate)
+    while object_manager.filter(**{field_name: candidate}):  # any matches
+        candidate = generate_new_candidate(candidate)
 
     return candidate
