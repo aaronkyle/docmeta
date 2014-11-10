@@ -46,7 +46,6 @@ def import_files():
                     document=document, name=key.name)
                 if created:
                     filename.save()
-                document.filenames.add(filename)
 
                 path = os.path.split(key.name)[0]
                 if path:
