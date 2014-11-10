@@ -7,6 +7,7 @@ import os
 from storages.backends.s3boto import S3BotoStorage
 
 import docmeta.models as dm
+from docmeta.importers.excel_importer import XLImporter
 
 
 def upload_files(source_path, root_path='./'):
@@ -37,7 +38,7 @@ def import_files():
     for key in storage.bucket.list():
         if not dm.Document.objects.filter(source_file=key.name):  # No existing metadata object
             title = os.path.splitext(os.path.basename(key.name))[0]
-            if title:  # ignore .xxx files
+            if title:  # ignore .xxx 'hidden' files
                 document = dm.Document(source_file=key.name,
                                        title=title)
                 document.save()  # save here so relations are possible
@@ -63,3 +64,8 @@ def update_metadata(overwrite=False):
     for document in dm.Document.objects.all():
         if document.update_metadata_from_source_file(overwrite=overwrite):
             document.save()
+
+
+def import_metadata(excel_filename):
+    importer = XLImporter(excel_filename)
+    importer.load()
