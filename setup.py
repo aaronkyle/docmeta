@@ -7,7 +7,8 @@ required_packages = [
     'django-categories',
     'django-storages',
     'pdfminer',
-    'python-dateutil']
+    'python-dateutil',
+    'openpyxl']
 
 setup(
     name='docmeta',

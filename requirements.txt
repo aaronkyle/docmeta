@@ -3,4 +3,6 @@
 pdfminer==20140328
 python-dateutil==2.2
 django-storages==1.1.8
+openpyxl==2.0.3
+
 
