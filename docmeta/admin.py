@@ -35,7 +35,7 @@ class DocumentAdmin(admin.ModelAdmin):
                                     'tags',
                                     'content',
                                     'categories')}),
-                 ('BibTex', {'classes': ('collapse-closed',),
+                 ('Bibliographic Data', {'classes': ('collapse-closed',),
                              'fields': ('year',
                                         'month',
                                         'day',
@@ -81,6 +81,7 @@ admin.site.register(dm.DocumentFileName, DocumentFileNameAdmin)
 admin.site.register(dm.Document, DocumentAdmin)
 admin.site.register(dm.BibTexEntryType, admin.ModelAdmin)
 admin.site.register(dm.CCCSEntryType, admin.ModelAdmin)
+admin.site.register(dm.Distribution, admin.ModelAdmin)
 admin.site.register(dm.Url, admin.ModelAdmin)
 admin.site.register(dm.Author, admin.ModelAdmin)
 admin.site.register(dm.Editor, admin.ModelAdmin)

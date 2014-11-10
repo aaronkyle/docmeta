@@ -29,7 +29,7 @@ version in. Then clone a working copy and setup the project for development in y
 
 ## Configuration
 
-Add taggit, storages, categoies.editor and docmeta to your INSTALLED_APPS
+Add taggit, storages, categories, categoies.editor and docmeta to your INSTALLED_APPS
 
 Run the management command 'syncdb' or 'migrate' as appropriate.
 

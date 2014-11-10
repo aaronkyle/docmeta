@@ -122,6 +122,10 @@ class CCCSEntryType(UniqueNamed):
         verbose_name_plural = 'CCCS Entry Types'
 
 
+class Distribution(UniqueNamed):
+    pass
+
+
 class Url(UniqueNamed):
     class Meta:
         verbose_name = "URL"
@@ -159,22 +163,61 @@ class Document(RichText, Displayable):
     editors = models.ManyToManyField(Editor, related_name='documents',
                                      help_text='Editor or editors of this file',
                                      verbose_name='Editor(s)')
-    year = models.IntegerField(null=True, blank=True)
-    month = models.IntegerField(null=True, blank=True)
-    day = models.IntegerField(null=True, blank=True)
-    chapter = models.CharField(max_length=256, null=True, blank=True)
+    year = models.IntegerField(null=True, blank=True,
+                               help_text='BibTeX year of publication')
+    month = models.IntegerField(null=True, blank=True,
+                                help_text='BibTeX month of publication')
+    day = models.IntegerField(null=True, blank=True,
+                              help_text='BibTeX day of publication')
+    chapter = models.CharField(max_length=256, null=True, blank=True,
+                               verbose_name='Book Chapter',
+                               help_text='BibTeX chapter reference')
     journal = models.CharField(max_length=256, null=True, blank=True,
-                               verbose_name='Journal / Publication')
-    volume = models.CharField(max_length=256, null=True, blank=True)
-    issue = models.CharField(max_length=256, null=True, blank=True)
-    pages = models.CharField(max_length=256, null=True, blank=True)
-    series = models.CharField(max_length=256, null=True, blank=True)
-    language = models.CharField(max_length=256, null=True, blank=True)
-    publishing_agency = models.CharField(max_length=256, null=True, blank=True)
-    publishing_house = models.CharField(max_length=256, null=True, blank=True)
-    publisher_city = models.CharField(max_length=256, null=True, blank=True)
-    publisher_address = models.CharField(max_length=256, null=True, blank=True)
-    cccs_source_path = models.CharField(max_length=512, null=True, blank=True)
+                               verbose_name='Journal / Publication',
+                               help_text='BibTeX Journal / Publication')
+    volume = models.CharField(max_length=256, null=True, blank=True,
+                              help_text='BibTeX volume reference')
+    issue = models.CharField(max_length=256, null=True, blank=True,
+                             help_text='BibTeX issue reference')
+    pages = models.CharField(max_length=256, null=True, blank=True,
+                             verbose_name='Page(s)',
+                             help_text='BibTeX pages reference')
+    series = models.CharField(max_length=256, null=True, blank=True,
+                              help_text='BibTeX series reference')
+    eprint = models.CharField(max_length=256, null=True, blank=True,
+                              verbose_name='Electronic Publication Type',
+                              help_text='BibTeX Electronic Publication Type')
+    howpublished = models.CharField(max_length=256, null=True, blank=True,
+                                    verbose_name='Alternative Publication Format',
+                                    help_text='BibTeX Alternative Publication Format')
+    booktitle = models.CharField(max_length=512, null=True, blank=True,
+                                 verbose_name='Book Title',
+                                 help_text='BibTeX Book Title')
+    edition = models.CharField(max_length=256, null=True, blank=True,
+                               verbose_name='Book Edition',
+                               help_text='BibTeX Book Edition')
+    language = models.CharField(max_length=256, null=True, blank=True,
+                                help_text='BibTeX Language')
+    publishing_agency = models.CharField(max_length=256, null=True, blank=True,
+                                         help_text='BibTeX Publishing Agency')
+    publishing_house = models.CharField(max_length=256, null=True, blank=True,
+                                        help_text='BibTeX Publishing House')
+    publisher_city = models.CharField(max_length=256, null=True, blank=True,
+                                      help_text='BibTeX Publisher City')
+    publisher_address = models.CharField(max_length=256, null=True, blank=True,
+                                         help_text='BibTex Publisher Address')
+
+    institution = models.CharField(max_length=256, null=True, blank=True,
+                                   help_text='BibTeX Institution')
+    organization = models.CharField(max_length=256, null=True, blank=True,
+                                    help_text='BibTeX Organization')
+    school = models.CharField(max_length=256, null=True, blank=True,
+                              help_text='BibTeX School')
+    key = models.CharField(max_length=256, null=True, blank=True,
+                           help_text='BibTeX Key')
+    crossref = models.CharField(max_length=256, null=True, blank=True,
+                                help_text='BibTeX Cross Reference')
+    distribution = models.ForeignKey(Distribution, null=True, blank=True)
     bibtex_entry_type = models.ForeignKey(BibTexEntryType, null=True, blank=True)
     cccs_entry_type = models.ForeignKey(CCCSEntryType, null=True, blank=True)
     countries = models.CharField(max_length=512, null=True, blank=True)
@@ -186,8 +229,24 @@ class Document(RichText, Displayable):
     receiver = models.ForeignKey(User, null=True, blank=True)
     regions = models.CharField(verbose_name='Region(s)', max_length=128, null=True, blank=True)
     document_id = models.CharField(verbose_name='Doc ID#/ISSN/ISBN', max_length=128, null=True, blank=True)
-    annotation = models.CharField(verbose_name='Bibliographic annotation', max_length=128, null=True, blank=True)
+    annotation = models.CharField(verbose_name='Bibliographic annotation', max_length=128, null=True, blank=True,
+                                  help_text='BibTeX Annotated Style')
     notes = models.TextField(verbose_name='Reviewer Notes', null=True, blank=True)
+    l1 = models.CharField(max_length=256, null=True, blank=True,
+                          verbose_name='L1 Geographical Administration Category',
+                          help_text='CCCS Level One standardized governance categorization')
+    l2 = models.CharField(max_length=256, null=True, blank=True,
+                          verbose_name='L2 Geographical Administration Category',
+                          help_text='CCCS Level Two standardized governance categorization')
+    l3 = models.CharField(max_length=256, null=True, blank=True,
+                          verbose_name='L3 Geographical Administration Category',
+                          help_text='CCCS Level Three standardized governance categorization')
+    l4 = models.CharField(max_length=256, null=True, blank=True,
+                          verbose_name='L4 Geographical Administration Category',
+                          help_text='CCCS Level Four standardized governance categorization')
+    l5 = models.CharField(max_length=256, null=True, blank=True,
+                          verbose_name='L5 Geographical Administration Category',
+                          help_text='CCCS Level Five standardized governance categorization')
 
     search_fields = ("content", "title", "tags__name")
 
@@ -203,6 +262,14 @@ class Document(RichText, Displayable):
 
     def save(self, *args, **kwargs):
         super(Document, self).save(*args, **kwargs)
+
+    def update_metadata(self, overwrite=False):
+        changed = False
+        if self.update_metadata_from_source_file(overwrite=overwrite):
+            changed = True
+        if self.update_bibtex_metadata(overwrite=overwrite):
+            changed = True
+        return changed
 
     def update_metadata_from_source_file(self, overwrite=False):
         """
@@ -229,6 +296,25 @@ class Document(RichText, Displayable):
                     changed = True
         return changed
 
+    def update_bibtex_metadata(self, overwrite=False):
+        changed = False
+
+        # year, month, day
+        if self.source_file_modified:
+            published_date = self.source_file_modified
+        elif self.source_file_created:
+            published_date = self.source_file_created
+        else:
+            published_date = self.created
+
+        for attname in ('year', 'month', 'day'):
+            if ((hasattr(self, attname) and getattr(self, attname) is not None) and
+                    not overwrite):
+                continue
+            setattr(self, attname, getattr(published_date, attname))
+            changed = True
+
+        return changed
 
     def update_sha(self):
         try:
