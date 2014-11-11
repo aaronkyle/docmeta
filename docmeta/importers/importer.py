@@ -62,8 +62,11 @@ def update_metadata(overwrite=False):
     :return: None
     """
     for document in dm.Document.objects.all():
-        if document.update_metadata_from_source_file(overwrite=overwrite):
-            document.save()
+        try:
+            if document.update_metadata_from_source_file(overwrite=overwrite):
+                document.save()
+        except:  # Give them all a go
+            pass
 
 
 def import_metadata(excel_filename):

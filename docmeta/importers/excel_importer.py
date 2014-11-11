@@ -307,7 +307,7 @@ class XLImporter(object):
         subcategory_names = [sc.strip() for sc in raw_subcategories.split(';')]
 
         for subcategory_name in subcategory_names:
-            subcategory, created = dm.DocumentCategory.get_or_create(
+            subcategory, created = dm.DocumentCategory.objects.get_or_create(
                 name=subcategory_name,
                 parent=parent)
             if created:
