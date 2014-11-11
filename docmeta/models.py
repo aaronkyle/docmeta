@@ -1,6 +1,8 @@
 import os
 import hashlib
 import re
+import datetime
+
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
@@ -224,7 +226,7 @@ class Document(RichText, Displayable):
     tags = TaggableManager(blank=True)
     categories = models.ManyToManyField(DocumentCategory, related_name='documents')
     url = models.ManyToManyField(Url, related_name='documents')
-    date_received = models.DateField(null=True, blank=True, auto_now_add=True,
+    date_received = models.DateField(null=True, blank=True, default=datetime.datetime.now,
                                      help_text='Date this file was received')
     receiver = models.ForeignKey(User, null=True, blank=True)
     regions = models.CharField(verbose_name='Region(s)', max_length=128, null=True, blank=True)
