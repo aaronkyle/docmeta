@@ -307,7 +307,12 @@ class XLImporter(object):
         subcategory_names = [sc.strip() for sc in raw_subcategories.split(';')]
 
         for subcategory_name in subcategory_names:
-            document.categories.add(dm.verify_categories([parent.name, subcategory_name], create_if_absent=True)[-1])
+            subcategory, created = dm.DocumentCategory.get_or_create(
+                name=subcategory_name,
+                parent=parent)
+            if created:
+                subcategory.save()
+            document.categories.add(subcategory)
 
     @staticmethod
     def transform_date(document, raw_date, field):
