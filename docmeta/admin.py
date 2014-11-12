@@ -23,7 +23,8 @@ class DocumentFileNameInline(admin.TabularInline):
 
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ['name', 'title', 'created', 'updated']
-    list_filter = ['tags']
+    list_filter = ['tags', 'categories']
+    search_fields = ['name', 'title']
     fieldsets = ((None, {'fields': ('name',
                                     'tags',
                                     'categories',
