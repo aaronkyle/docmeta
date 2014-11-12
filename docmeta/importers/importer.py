@@ -72,3 +72,33 @@ def update_metadata(overwrite=False):
 def import_metadata(excel_filename):
     importer = XLImporter(excel_filename)
     importer.load()
+
+
+def fix_significance(root_category_name='significance'):
+    """
+    Make the short significance categories into tags on the related documents.
+    Make the description significance categories the content of the significance field
+    Remove all the significance categories
+    :return: None
+    """
+
+    # Add the short significance categories as tags and delete the catetories
+    root = dm.DocumentCategory.objects.get(name=root_category_name)
+
+    short_cat = dm.DocumentCategory.objects.get(name='short', parent=root)
+    for category in short_cat.children.all():
+        for document in category.documents.all():
+            document.tags.add(category.name)
+        category.delete()
+    short_cat.delete()
+
+    # Add the descriptions and delete the categories
+    descriptive = dm.DocumentCategory.objects.get(name='descriptive', parent=root)
+    for category in descriptive.children.all():
+        for document in category.documents.all():
+            document.significance = category.name
+            document.save()
+        category.delete()
+    descriptive.delete()
+
+    root.delete()
