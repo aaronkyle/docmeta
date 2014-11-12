@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 
+from mezzanine.core.fields import RichTextField
 from mezzanine.core.models import Displayable, RichText, CONTENT_STATUS_DRAFT, CONTENT_STATUS_PUBLISHED
 from taggit.managers import TaggableManager
 
@@ -249,6 +250,8 @@ class Document(RichText, Displayable):
     l5 = models.CharField(max_length=256, null=True, blank=True,
                           verbose_name='L5 Geographical Administration Category',
                           help_text='CCCS Level Five standardized governance categorization')
+    significance = RichTextField(null=True, blank=True,
+                                 help_text='Description of the significance of this document')
 
     search_fields = ("content", "title", "tags__name")
 
