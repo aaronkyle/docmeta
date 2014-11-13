@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load mezzanine_tags %}
+{% block main %}
+    <table class="table table-striped table-responsive">
+        <thead>
+        <tr>
+            <th>SHA</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sha, documents in sha_document_list %}
+            <tr>
+                <td>{{ sha }}</td>
+                <td>
+                    <table class="table table-striped table-responsive">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for document in documents %}
+                            <tr>
+                                <td><a href="{% url 'document-detail' slug=document.slug %}">{{ document.name }}</a></td>
+                                <td>{{ document.title }}</td>
+                                <td><a class="btn btn-warning" href="{% url 'document-delete' pk=document.id %}?next={{ request.path }}">Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% pagination_for sha_document_list %}
+{% endblock main %}

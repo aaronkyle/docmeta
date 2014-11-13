@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load mezzanine_tags %}
+{% block main %}
+    <p>Deleting the metadata document will not delete the source file.</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object.name }}"?</p>
+        <input type="submit" value="Confirm" />
+    </form>
+{% endblock main %}
