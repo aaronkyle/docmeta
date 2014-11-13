@@ -80,6 +80,7 @@
                     <tbody>
                     <tr><th>Date Received</th><td>{{ document.date_received | date }}</td></tr>
                     <tr><th>Receiver</th><td>{{ document.user.first_name }} {{ document.user.last_name }}</td></tr>
+                    <tr><th>Significance</th><td>{{ document.significance|mkdown }}</td></tr>
                     <tr><th>Notes</th><td>{{ document.notes|mkdown }}</td></tr>
                     <tr><th>Distribution</th><td>{{ document.distribution.name }}</td></tr>
                     <tr><th>BibTeX Entry Type</th><td>{{ document.bibtex_entry_type.name }}</td></tr>

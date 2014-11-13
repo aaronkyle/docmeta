@@ -42,6 +42,7 @@ class DocumentAdmin(admin.ModelAdmin):
                            'fields': ('date_received',
                                       'receiver',
                                       'notes',
+                                      'significance',
                                       'distribution',
                                       'bibtex_entry_type',
                                       'cccs_entry_type',
