@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>Blank</title>
+    <title>Input</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,8 +23,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
 
-    <!-- ADDITIONAL custom styles
- -->
+    <!-- ADDITIONAL custom styles - added along with date selector-->
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-fileupload/bootstrap-fileupload.css" />
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-datepicker/css/datepicker.css" />
@@ -476,24 +475,34 @@
           </div>
       </aside>
       <!--sidebar end-->
+
+
       <!--main content start-->
       <section id="main-content">
-          <section class="wrapper site-min-height">
+          <section class="wrapper">
               <!-- page start-->
 
-
-             <div class="row">
-                  <div class="col-lg-11">
+              
+              <div class="row">
+                  <div class="col-lg-4">
                       <section class="panel">
                           <header class="panel-heading">
-                              Add a Document
+                              General Provenience Information
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
                           </header>
+                          <div class="panel-body">
+
+
+
                           <div class="panel-body">
                               <form role="form">
 
                                   <div class="form-group">
                                       <label for="url">URL</label>
-                                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="URL">
+                                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="file://~/cccs/docmeta/concept/ui-concept/doc-meta-input.html">
                                   </div>
 
 <div>
@@ -598,9 +607,7 @@ NOTE: It would be ideal to call up some sort of calendar box (example added).<br
 
 NOTE: It would be great if this could auto-complete to show registered CCCS people (full name).<br />
 ---
-&nbsp;
-</div>
-<div>
+&nbsp;<br />
 ---<br />
 
 <label for="distribution">Distribution</label>
@@ -623,8 +630,32 @@ NOTE: Indication of whether or not a file is limited in distribution. <br />This
 ---
 &nbsp;
 </div>
+
+
+</div>
+                      </section>
+
+
+
+
+
+
+
 <div>
----<br />
+
+
+              <div class="row">
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Referential Categorization 
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body">
+
 
 <label for="bibtex-doc-type">BIBTEX entry type</label>
 <div class="input-group m-bot15">
@@ -652,7 +683,8 @@ NOTE: Indication of whether or not a file is limited in distribution. <br />This
                                           </div>
 NOTE: Currently relies on standard BibTex entry types; CCCS entries under consideration <br/>This should ideally call a drop-down element.<br />
 ---
-</div>
+
+
                                   <div class="form-group">
 ---<br />
 
@@ -685,6 +717,8 @@ NOTE: Currently relies on standard BibTex entry types; CCCS entries under consid
 
 NOTE: Short encapsulation of the ‘type’ of document—be it a report, action plan, presentation, image, etc. This description should be standardized, but nuance can be introduced as necessary by adding a description after the category label. <br/>This should ideally call a drop-down element.<br />
 ---
+
+
 <div>
 ---<br />
                                   <div class="form-group">
@@ -693,9 +727,7 @@ NOTE: Short encapsulation of the ‘type’ of document—be it a report, action
                                   </div>
 NOTE: It would be ideal if this would offer some form of auto-complete referencing existing categories.<br />
 ---
-&nbsp;
-</div>
-<div>
+&nbsp;<br />
 ---<br />                                  <div class="form-group">
                                       <label for="exampleInputPassword1">Tags</label>
                                       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="enable comma separated values, multi-word groups">
@@ -703,10 +735,27 @@ NOTE: It would be ideal if this would offer some form of auto-complete referenci
 NOTE: It would be ideal if this would offer some form of auto-complete referencing existing categories.<br />
 ---
 &nbsp;
+
+
 </div>
+                      </section>
 
 <div>
 ---<br />
+
+
+
+              <div class="row">
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Geographic Provenience
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body">
 
                                   <div class="form-group">
                                       <label for="country">Country / Countries</label>
@@ -715,10 +764,6 @@ NOTE: It would be ideal if this would offer some form of auto-complete referenci
 
 NOTE: List to be derived from country table. We will need to allow multiple country assignments.<br />
 ---
-&nbsp;
-</div>
-<div>
----<br />
 
                                   <div class="form-group">
                                       <label for="received-date">Region(s)</label>
@@ -727,10 +772,29 @@ NOTE: List to be derived from country table. We will need to allow multiple coun
 
 NOTE: Ideally this would also derive from a DB list. We will need to allow multiple country assignments.<br />
 ---
-&nbsp;
+
 </div>
+                      </section>
+
+
 <div>
 ---<br />
+
+
+
+
+              <div class="row">
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Publication Date
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body">
+
 
                                   <div class="form-group">
                                       <label for="publication-year">Year Published</label>
@@ -740,8 +804,7 @@ NOTE: Ideally this would also derive from a DB list. We will need to allow multi
 NOTE: Reporting out to different citation formats will require that we distinguish years from months from days.  YEAR maps to BibTex `year`; the year of publication (or, if unpublished, the year of creation).<br />
 ---
 &nbsp;
-</div>
-<div>
+
 
                                   <div class="form-group">
                                       <label for="">Month Published</label>
@@ -754,8 +817,16 @@ NOTE: Reporting out to different citation formats will require that we distingui
                                       <label for="publication-day">Day Published</label>
                                       <input type="email" class="form-control" id="exampleInputEmail1" placeholder="day">
                                   </div>
-<div>
+
 ---<br />
+
+
+</div>
+                      </section>
+
+
+
+<div>
 
                                   <div class="form-group">
                                       <label for="author">Author(s)</label>
@@ -766,8 +837,14 @@ NOTE: Maps to BibTex `author`; the name(s) of the author(s) (in the case of more
 ---
 &nbsp;
 </div>
-<div>
+
 ---<br />
+<div>
+<div>
+
+
+
+
 
                                   <div class="form-group">
                                       <label for="received-date">Document / Article Title</label>
@@ -782,6 +859,22 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 <div>
 ---<br />
 
+
+
+
+              <div class="row">
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Journals
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body">
+
+
                                   <div class="form-group">
                                       <label for="received-date">Journal / Publication</label>
                                       <input type="email" class="form-control" id="exampleInputEmail1" placeholder="mm/dd/yy">
@@ -789,10 +882,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -802,10 +892,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -815,10 +902,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -828,10 +912,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -841,10 +922,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -854,10 +932,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -867,11 +942,31 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
+&nbsp;<br />
+---<br />
+
 </div>
+                      </section>
+
+
+
 
 <div>
----<br />
+<div>
+
+
+              <div class="row">
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Books
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body">
+
 
                                   <div class="form-group">
                                       <label for="received-date">Editor(s)</label>
@@ -880,10 +975,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -893,10 +985,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -906,10 +995,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -919,10 +1005,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -932,10 +1015,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -945,10 +1025,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -958,10 +1035,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -971,11 +1045,35 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
+
+
+</div>
+                      </section>
+
+
+
+
+
+
+
+
+              <div class="row">
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Collapsible Widget
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body"></div>
+                      </section>
+
+
+
 
                                   <div class="form-group">
                                       <label for="received-date">Cross-Ref.</label>
@@ -984,10 +1082,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -997,11 +1092,25 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
+
+
+
+              <div class="row">
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Collapsible Widget
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body"></div>
+                      </section>
+
+
 
                                   <div class="form-group">
                                       <label for="received-date">Doc ID#</label>
@@ -1010,10 +1119,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -1023,23 +1129,31 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
-                                  <div class="form-group">
+
+
+              <div class="row">
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Notations
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body">
+
+                                <div class="form-group">
                                       <label for="received-date">Abstract</label>
                                       <input type="email" class="form-control" id="exampleInputEmail1" placeholder="mm/dd/yy">
                                   </div>
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -1049,10 +1163,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -1062,11 +1173,32 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
+
+</div>
+                      </section>
+
+
+
+  
+
+
+
+              <div class="row">
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Project Applicability
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body">
+
+
+
 
                                   <div class="form-group">
                                       <label for="received-date">Significance to Client Document Development [short tags]</label>
@@ -1075,10 +1207,7 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
-&nbsp;
-</div>
-
-<div>
+&nbsp;<br />
 ---<br />
 
                                   <div class="form-group">
@@ -1089,77 +1218,9 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
 NOTE: It would be ideal to call up some sort of calendar box.<br />
 ---
 &nbsp;
+
 </div>
-
-<div>
----<br />
-
-                                  <div class="form-group">
-                                      <label for="received-date">L1 Geographical Admin. Cat.</label>
-                                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="mm/dd/yy">
-                                  </div>
-
-NOTE: It would be ideal to call up some sort of calendar box.<br />
----
-&nbsp;
-</div>
-
-<div>
----<br />
-
-                                  <div class="form-group">
-                                      <label for="received-date">L2 Geographical Admin. Cat.</label>
-                                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="mm/dd/yy">
-                                  </div>
-
-NOTE: It would be ideal to call up some sort of calendar box.<br />
----
-&nbsp;
-</div>
-
-<div>
----<br />
-
-                                  <div class="form-group">
-                                      <label for="received-date">L3 Geographical Admin. Cat.</label>
-                                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="mm/dd/yy">
-                                  </div>
-
-NOTE: It would be ideal to call up some sort of calendar box.<br />
----
-&nbsp;
-</div>
-
-<div>
----<br />
-
-                                  <div class="form-group">
-                                      <label for="received-date">L4 Geographical Admin. Cat.</label>
-                                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="mm/dd/yy">
-                                  </div>
-
-NOTE: It would be ideal to call up some sort of calendar box.<br />
----
-&nbsp;
-</div>
-
-<div>
----<br />
-
-                                  <div class="form-group">
-                                      <label for="received-date">L5 Geographical Admin. Cat.</label>
-                                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="mm/dd/yy">
-                                  </div>
-
-NOTE: It would be ideal to call up some sort of calendar box.<br />
----
-&nbsp;
-</div>
-
-
-
-
-
+                      </section>
 
 
 
@@ -1171,18 +1232,246 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
                                   </div>
                                   <button type="submit" class="btn btn-info">Submit</button>
                               </form>
+                          </div>
+
+<p>&nbsp;<p>
+
+
+
+                          </div>
+                      </section>
+                  </div>
+              </div>
+
+<!--
+                          <div class="col-lg-6">
+                              <!--widget start-->
+
+<!--
+                              <section class="panel">
+                                  <header class="panel-heading tab-bg-dark-navy-blue">
+                                      <ul class="nav nav-tabs nav-justified ">
+                                          <li class="active">
+                                              <a href="#popular" data-toggle="tab">
+                                                  Popular
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a href="#comments" data-toggle="tab">
+                                                  Comments
+                                              </a>
+                                          </li>
+                                          <li class="">
+                                              <a href="#recent" data-toggle="tab">
+                                                  Recents
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </header>
+                                  <div class="panel-body">
+                                      <div class="tab-content tasi-tab">
+                                          <div class="tab-pane active" id="popular">
+                                              <article class="media">
+                                                  <a class="pull-left thumb p-thumb">
+                                                      <img src="img/product1.jpg">
+                                                  </a>
+                                                  <div class="media-body">
+                                                      <a class=" p-head" href="#">Item One Tittle</a>
+                                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                  </div>
+                                              </article>
+                                              <article class="media">
+                                                  <a class="pull-left thumb p-thumb">
+                                                      <img src="img/product2.png">
+                                                  </a>
+                                                  <div class="media-body">
+                                                      <a class=" p-head" href="#">Item Two Tittle</a>
+                                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                  </div>
+                                              </article>
+                                              <article class="media">
+                                                  <a class="pull-left thumb p-thumb">
+                                                      <img src="img/product3.png">
+                                                  </a>
+                                                  <div class="media-body">
+                                                      <a class=" p-head" href="#">Item Three Tittle</a>
+                                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                  </div>
+                                              </article>
+                                          </div>
+                                          <div class="tab-pane" id="comments">
+                                              <article class="media">
+                                                  <a class="pull-left thumb p-thumb">
+                                                      <img src="img/avatar-mini.jpg">
+                                                  </a>
+                                                  <div class="media-body">
+                                                      <a class="cmt-head" href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
+                                                      <p> <i class="fa fa-clock-o"></i> 1 hours ago</p>
+                                                  </div>
+                                              </article>
+                                              <article class="media">
+                                                  <a class="pull-left thumb p-thumb">
+                                                      <img src="img/avatar-mini2.jpg">
+                                                  </a>
+                                                  <div class="media-body">
+                                                      <a class="cmt-head" href="#">Nulla vel metus scelerisque ante sollicitudin commodo</a>
+                                                      <p> <i class="fa fa-clock-o"></i> 23 mins ago</p>
+                                                  </div>
+                                              </article>
+                                              <article class="media">
+                                                  <a class="pull-left thumb p-thumb">
+                                                      <img src="img/avatar-mini3.jpg">
+                                                  </a>
+                                                  <div class="media-body">
+                                                      <a class="cmt-head" href="#">Donec lacinia congue felis in faucibus. </a>
+                                                      <p> <i class="fa fa-clock-o"></i> 15 mins ago</p>
+                                                  </div>
+                                              </article>
+                                          </div>
+                                          <div class="tab-pane " id="recent">
+                                              Recent Item goes here
+                                          </div>
+                                      </div>
+                                  </div>
+                              </section>
+                              <!--widget end-->
+
+<!--
+
+<div class="row">
+                  <div class="col-lg-6">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Timeline
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body profile-activity">
+                              <h5 class="pull-right">12 August 2013</h5>
+                              <div class="activity terques">
+                                  <span>
+                                      <i class="fa fa-shopping-cart"></i>
+                                  </span>
+                                  <div class="activity-desk">
+                                      <div class="panel">
+                                          <div class="panel-body">
+                                              <div class="arrow"></div>
+                                              <i class=" fa fa-clock-o"></i>
+                                              <h4>10:45 AM</h4>
+                                              <p>Purchased new equipments for zonal office setup and stationaries.</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="activity alt purple">
+                                  <span>
+                                      <i class="fa fa-rocket"></i>
+                                  </span>
+                                  <div class="activity-desk">
+                                      <div class="panel">
+                                          <div class="panel-body">
+                                              <div class="arrow-alt"></div>
+                                              <i class=" fa fa-clock-o"></i>
+                                              <h4>12:30 AM</h4>
+                                              <p>Lorem ipsum dolor sit amet consiquest dio</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="activity blue">
+                                  <span>
+                                      <i class="fa fa-bullhorn"></i>
+                                  </span>
+                                  <div class="activity-desk">
+                                      <div class="panel">
+                                          <div class="panel-body">
+                                              <div class="arrow"></div>
+                                              <i class=" fa fa-clock-o"></i>
+                                              <h4>10:45 AM</h4>
+                                              <p>Please note which location you will consider, or both. Reporting to the VP  you will be responsible for managing.. </p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="activity alt green">
+                                  <span>
+                                      <i class="fa fa-beer"></i>
+                                  </span>
+                                  <div class="activity-desk">
+                                      <div class="panel">
+                                          <div class="panel-body">
+                                              <div class="arrow-alt"></div>
+                                              <i class=" fa fa-clock-o"></i>
+                                              <h4>12:30 AM</h4>
+                                              <p>Please note which location you will consider, or both.</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
 
                           </div>
                       </section>
                   </div>
 
 
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Custom content
+                          </header>
+                          <div class="list-group">
+                              <a class="list-group-item " href="javascript:;">
+                                  <h4 class="list-group-item-heading">List group item heading</h4>
+                                  <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                              </a>
+                              <a class="list-group-item active" href="javascript:;">
+                                  <h4 class="list-group-item-heading">List group item heading</h4>
+                                  <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                              </a>
+                              <a class="list-group-item" href="javascript:;">
+                                  <h4 class="list-group-item-heading">List group item heading</h4>
+                                  <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                              </a>
+                          </div>
+                      </section>
+                  </div>
+              </div>
+
+
+              <div class="row">
+                  <div class="col-lg-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Collapsible Widget
+                              <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+                          </header>
+                          <div class="panel-body"></div>
+                      </section>
+
+
+                    
+                  </div>
+-->
 
 
               <!-- page end-->
           </section>
       </section>
       <!--main content end-->
+
+
+
+
+
+
+
+
 
       <!-- Right Slidebar start -->
       <div class="sb-slidebar sb-right sb-style-overlay">
@@ -1350,6 +1639,9 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
     <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="js/respond.min.js" ></script>
 
+    <!-- ADDITIONAL custom styles - added along with collapsable widget-->
+    <script src="assets/jquery-knob/js/jquery.knob.js"></script>
+
  <!--plugins for DATE PICKER-->
 
   <script type="text/javascript" src="assets/fuelux/js/spinner.min.js"></script>
@@ -1365,11 +1657,18 @@ NOTE: It would be ideal to call up some sort of calendar box.<br />
   <script type="text/javascript" src="assets/jquery-multi-select/js/jquery.multi-select.js"></script>
   <script type="text/javascript" src="assets/jquery-multi-select/js/jquery.quicksearch.js"></script>
 
+
+
     <!--common script for all pages-->
     <script src="js/common-scripts.js"></script>
 
     <!--ADDITIONAL script for date picker-->
     <script src="js/advanced-form-components.js"></script>
 
+      //knob
+      $(".knob").knob();
+
+
+  </script>
   </body>
 </html>
