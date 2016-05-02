@@ -1,9 +1,8 @@
 # DocMeta
 
-`docmeta` is tool that manipulates metadata for organizing, search and (eventually) citing documents.
+`docmeta` is tool that manipulates metadata for organizing, search and (eventually) citing documents. The objective is to help users to manage documents--both as file objects (available for download) and as metadata associated to those objects.
 
 I started work on this tool via [CCCS](http://crossculturalconuslt.com).  [Paul Whipp](https://github.com/pwhipp) built the initial prototype.
-
 
 
 ## Assumptions / Plug-in Dependencies
