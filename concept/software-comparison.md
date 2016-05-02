@@ -1,4 +1,6 @@
 
+Open Source Projects
+
 * [RefDB](http://refdb.sourceforge.net/) [wikipedia](https://en.wikipedia.org/wiki/RefDB)
 * [Pybliographer](http://pybliographer.org/) [wikipedia](https://en.wikipedia.org/wiki/Pybliographer)
 * [KBibTeX](https://gna.org/projects/kbibtex/) [wikipedia](https://en.wikipedia.org/wiki/KBibTeX)
@@ -7,6 +9,8 @@
 * [Docear](http://www.docear.org/) [wikipedia]() [github](https://github.com/docear)
 * [Bebop (software)](https://en.wikipedia.org/wiki/Bebop_(software))
 * [iLibrarian](https://i-librarian.net/)
+
+NOTE: Many people rave about [Mendeley](https://www.mendeley.com/features/), but it is not OpenSource.
 
 ## References
 
