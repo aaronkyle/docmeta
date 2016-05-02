@@ -14,8 +14,9 @@ Open Source Projects
 
 Other Django Mods:
 
-*[pybuilder - Continuous build tool for Python. http://pybuilder.github.io](https://github.com/pybuilder/pybuilder)
-*[PyBuilder Django Enhanced Plugin](https://github.com/MirkoRossini/pybuilder_django_enhanced_plugin)
+* [pybuilder - Continuous build tool for Python. http://pybuilder.github.io](https://github.com/pybuilder/pybuilder)
+* [PyBuilder Django Enhanced Plugin](https://github.com/MirkoRossini/pybuilder_django_enhanced_plugin)
+    - [pybuilder-django-enhanced-plugin 0.0.9](https://pypi.python.org/pypi/pybuilder-django-enhanced-plugin/)
 
 ----
 
