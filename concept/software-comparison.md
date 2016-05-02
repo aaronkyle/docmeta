@@ -10,6 +10,16 @@ Open Source Projects
 * [Bebop (software)](https://en.wikipedia.org/wiki/Bebop_(software))
 * [iLibrarian](https://i-librarian.net/)
 
+----
+
+Other Django Mods:
+
+*[pybuilder - Continuous build tool for Python. http://pybuilder.github.io](https://github.com/pybuilder/pybuilder)
+*[PyBuilder Django Enhanced Plugin](https://github.com/MirkoRossini/pybuilder_django_enhanced_plugin)
+
+----
+
+
 NOTE: Many people rave about [Mendeley](https://www.mendeley.com/features/), but it is not OpenSource.
 
 ## References
