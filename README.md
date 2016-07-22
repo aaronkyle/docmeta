@@ -29,9 +29,9 @@ In your main project, uninstall docmeta if it is already installed via the requi
 version in. Then clone a working copy and setup the project for development in your main project's virtualenv e.g:
 
 ```
-(cccs)~/wk/cccs $ git clone https://github.com/cccs-web/docmeta
-(cccs)~/wk/cccs $ cd docmeta
-(cccs)~/wk/cccs $ python setup.py develop
+(categorise)~/web/ $ git clone https://github.com/aaronkyle/docmeta
+(categorise)~/web/ $ cd docmeta
+(categorise)~/web/ $ python setup.py develop
 ```
 
 ## Configuration
@@ -55,17 +55,20 @@ urlpatterns += patterns(<
 ```
 
 The current backend is S3 so the following settings must be set to appropriate values (keep them out of your repository using a secrets.py):
-  
+
+```  
 AWS_STORAGE_BUCKET_NAME
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
+```
+
 
 ## Updating current production environments
 
 When development is done, the production environments become out of date. Updating them is optional and can be done using the following pip command in the relevant environment:
 
 ```
-(production)abadi:~/production $ pip install -e git://github.com/cccs-web/docmeta.git#egg=docmeta
+(production)categorise:~/production $ pip install -e git://github.com/aaronkyle/docmeta.git#egg=docmeta
 ```
 
 If necessary, use pip freeze to write back the commit that has been installed this way.
